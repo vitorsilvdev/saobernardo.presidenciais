@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SBRP | PORTAL ELEITORAL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Cores ajustadas para combinar com a bandeira */
+            --bg-overlay: rgba(10, 10, 15, 0.85); /* Camada escura sobre a bandeira */
+            --card-bg: rgba(255, 255, 255, 0.07);
+            --primary-yellow: #ffcc00;
+            --gov-blue: #007bff;
+            --brazil-green: #009b3a;
+            --white: #ffffff;
+            --text-gray: #d0d0d0;
+            --radius: 20px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #000;
+            /* IMAGEM DA BANDEIRA AO FUNDO */
+            background-image: linear-gradient(var(--bg-overlay), var(--bg-overlay)), 
+                              url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/1280px-Flag_of_Brazil.svg.png');
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+            color: var(--white);
+            min-height: 100vh;
+        }
+
+        /* Header Elegante */
+        header {
+            padding: 100px 20px 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(to right, var(--primary-yellow), #fff, var(--gov-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
+        }
+
+        header p {
+            color: var(--white);
+            opacity: 0.9;
+            font-size: 1.1rem;
+            margin-top: 10px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Cards de Candidatos */
+        .grid-candidatos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: var(--radius);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-yellow);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            border-bottom: 4px solid var(--primary-yellow);
+        }
+
+        .card-body {
+            padding: 25px;
+            text-align: center;
+        }
+
+        .tag-cargo {
+            background: var(--brazil-green);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 6px 18px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .card-body h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .proposta {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Área de Votação */
+        .vote-section {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--primary-yellow);
+            padding: 50px 30px;
+            border-radius: var(--radius);
+            text-align: center;
+        }
+
+        .vote-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            color: var(--primary-yellow);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        select {
+            width: 100%;
+            max-width: 400px;
+            padding: 18px;
+            font-size: 1.1rem;
+            border-radius: 12px;
+            background: #ffffff;
+            color: #000;
+            border: none;
+            margin-bottom: 25px;
+            font-weight: 600;
+            outline: none;
+        }
+
+        .btn-votar {
+            background: linear-gradient(to right, #009b3a, #007bff);
+            color: white;
+            border: none;
+            padding: 20px 60px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            border-radius: 50px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-votar:hover {
+            transform: scale(1.05);
+            filter: brightness(1.2);
+            box-shadow: 0 15px 35px rgba(0, 155, 58, 0.4);
+        }
+
+        .hidden { display: none; }
+        
+        .sucesso-caixa {
+            background: rgba(0, 155, 58, 0.2);
+            border: 2px solid #00ff62;
+            color: #00ff62;
+            padding: 50px;
+            border-radius: var(--radius);
+            text-align: center;
+            font-weight: 900;
+            font-size: 1.8rem;
+            backdrop-filter: blur(10px);
+        }
+
+        footer {
+            padding: 80px 20px;
+            text-align: center;
+            color: #fff;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-shadow: 0 2px 5px #000;
+        }
+
+        footer strong { color: var(--primary-yellow); }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Portal SBRP</h1>
+    <p>Eleições Presidenciais 2026</p>
+</header>
+
+<div class="container">
+    
+    <div class="grid-candidatos">
+        <div class="card">
+            <img src="https://via.placeholder.com/400x320/222/fff?text=Candidato+1" class="card-img" alt="Candidato">
+            <div class="card-body">
+                <span class="tag-cargo">ORDEM E PROGRESSO</span>
+                <h3>Ronaldinho Fenómeno</h3>
+                <p class="proposta">Proposta</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://via.placeholder.com/400x320/222/fff?text=Candidato+2" class="card-img" alt="Candidato">
+            <div class="card-body">
+                <span class="tag-cargo">UNIÃO NACIONAL</span>
+                <h3>Cristiano Messi</h3>
+                <p class="proposta">Proposta</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="caixa-eleitoral">
+        <div class="vote-section">
+            <h2>Cédula Eleitoral</h2>
+            <p style="margin-bottom: 25px; font-weight: 500;">O voto é um dever do cidadão de SBRP.</p>
+            
+            <select id="voto-select">
+                <option value="" disabled selected>Clique para selecionar...</option>
+                <option value="Candidato 1">Nome do Candidato 1</option>
+                <option value="Candidato 2">Nome do Candidato 2</option>
+            </select>
+            <br>
+            <button class="btn-votar" onclick="votar()">Confirmar Voto</button>
+        </div>
+    </div>
+
+    <div id="voto-concluido" class="sucesso-caixa hidden">
+        🇧🇷 VOTO ESCOLHIDO COM SUCESSO!
+    </div>
+
+</div>
+
+<footer>
+    <strong>SÃO BERNARDO ROLEPLAY</strong> - OFICIAL<br>
+    Justiça e Liberdade &copy; 2026
+</footer>
+
+<script>
+    function votar() {
+        const sel = document.getElementById('voto-select');
+        if(sel.value === "") {
+            alert("⚠️ Selecione um candidato!");
+            return;
+        }
+        localStorage.setItem('hasVotedSBC_Flag', 'true');
+        mostrarStatus();
+    }
+
+    function mostrarStatus() {
+        if(localStorage.getItem('hasVotedSBC_Flag') === 'true') {
+            document.getElementById('caixa-eleitoral').classList.add('hidden');
+            document.getElementById('voto-concluido').classList.remove('hidden');
+        }
+    }
+
+    window.onload = mostrarStatus;
+</script>
+
+</body>
+</html>
