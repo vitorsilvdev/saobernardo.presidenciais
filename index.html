@@ -2,286 +2,525 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SBRP | PORTAL ELEITORAL</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <script type="importmap">
+    {
+      "imports": {
+        "lucide": "https://esm.sh/lucide"
+      }
+    }
+    </script>
+
     <style>
         :root {
-            /* Cores ajustadas para combinar com a bandeira */
-            --bg-overlay: rgba(10, 10, 15, 0.85); /* Camada escura sobre a bandeira */
-            --card-bg: rgba(255, 255, 255, 0.07);
             --primary-yellow: #ffcc00;
-            --gov-blue: #007bff;
-            --brazil-green: #009b3a;
+            --gov-blue: #002277;
+            --gov-blue-light: #0056b3;
+            --brazil-green: #006b3a;
+            --brazil-green-glow: #00ff8c;
             --white: #ffffff;
-            --text-gray: #d0d0d0;
-            --radius: 20px;
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --radius: 24px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #000;
-            /* IMAGEM DA BANDEIRA AO FUNDO */
-            background-image: linear-gradient(var(--bg-overlay), var(--bg-overlay)), 
-                              url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/1280px-Flag_of_Brazil.svg.png');
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #050a05;
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(0, 107, 58, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(0, 34, 119, 0.15) 0%, transparent 40%),
+                url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/1280px-Flag_of_Brazil.svg.png');
             background-attachment: fixed;
             background-position: center;
             background-size: cover;
             color: var(--white);
             min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        /* Header Elegante */
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 10, 5, 0.92) 0%, rgba(5, 5, 20, 0.95) 100%);
+            z-index: -1;
+        }
+
         header {
-            padding: 100px 20px 40px;
+            padding: 60px 20px 30px;
             text-align: center;
         }
 
+        .gov-badge {
+            background: var(--brazil-green);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 4px 12px;
+            border-radius: 4px;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
         header h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 3.5rem;
+            font-size: clamp(2.5rem, 8vw, 4rem);
             font-weight: 900;
-            background: linear-gradient(to right, var(--primary-yellow), #fff, var(--gov-blue));
+            background: linear-gradient(to bottom, #fff, #ccc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
+            letter-spacing: -1px;
+            line-height: 1;
         }
 
         header p {
-            color: var(--white);
-            opacity: 0.9;
-            font-size: 1.1rem;
+            color: var(--primary-yellow);
+            font-size: 0.9rem;
             margin-top: 10px;
             letter-spacing: 4px;
             text-transform: uppercase;
             font-weight: 600;
+            opacity: 0.8;
         }
 
         .container {
             max-width: 1000px;
             margin: 0 auto;
             padding: 20px;
+            padding-bottom: 100px;
         }
 
-        /* Cards de Candidatos */
         .grid-candidatos {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
         }
 
         .card {
             background: var(--card-bg);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-radius: var(--radius);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid var(--glass-border);
             overflow: hidden;
-            transition: all 0.4s ease;
+            transition: var(--transition);
+            cursor: default;
         }
 
         .card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-8px);
             border-color: var(--primary-yellow);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-img-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 100%;
+            overflow: hidden;
         }
 
         .card-img {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 320px;
+            height: 100%;
             object-fit: cover;
-            border-bottom: 4px solid var(--primary-yellow);
+            filter: grayscale(20%);
+            transition: var(--transition);
+        }
+
+        .card:hover .card-img {
+            filter: grayscale(0%);
+            scale: 1.05;
+        }
+
+        .card-number {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: var(--primary-yellow);
+            color: #000;
+            font-weight: 900;
+            font-size: 1.5rem;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
 
         .card-body {
-            padding: 25px;
-            text-align: center;
+            padding: 20px;
         }
 
         .tag-cargo {
-            background: var(--brazil-green);
-            color: white;
-            font-size: 0.75rem;
+            color: var(--brazil-green-glow);
+            font-size: 0.7rem;
             font-weight: 700;
-            padding: 6px 18px;
-            border-radius: 50px;
-            display: inline-block;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            display: block;
         }
 
         .card-body h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             margin-bottom: 10px;
-            color: #fff;
+            font-weight: 800;
         }
 
         .proposta {
-            color: var(--text-gray);
-            font-size: 0.95rem;
-            line-height: 1.5;
+            color: #aaa;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            font-style: italic;
         }
 
-        /* Área de Votação */
         .vote-section {
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
-            border: 2px solid var(--primary-yellow);
-            padding: 50px 30px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--glass-border);
+            padding: 40px 25px;
             border-radius: var(--radius);
             text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        .vote-section h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.2rem;
-            margin-bottom: 25px;
+        .vote-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 15px;
             color: var(--primary-yellow);
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .vote-header h2 {
+            font-size: 1.8rem;
+            text-transform: uppercase;
+        }
+
+        .instruction {
+            margin-bottom: 30px;
+            color: #ccc;
+            font-size: 0.95rem;
+        }
+
+        .select-wrapper {
+            position: relative;
+            margin-bottom: 25px;
         }
 
         select {
             width: 100%;
-            max-width: 400px;
             padding: 18px;
-            font-size: 1.1rem;
-            border-radius: 12px;
-            background: #ffffff;
-            color: #000;
-            border: none;
-            margin-bottom: 25px;
-            font-weight: 600;
+            font-size: 1rem;
+            border-radius: 14px;
+            background: #111;
+            color: #fff;
+            border: 1px solid var(--glass-border);
+            cursor: pointer;
+            appearance: none;
             outline: none;
+            transition: var(--transition);
         }
 
         .btn-votar {
-            background: linear-gradient(to right, #009b3a, #007bff);
+            width: 100%;
+            background: linear-gradient(135deg, var(--brazil-green), #004d2a);
             color: white;
             border: none;
-            padding: 20px 60px;
-            font-size: 1.2rem;
+            padding: 20px;
+            font-size: 1.1rem;
             font-weight: 800;
-            border-radius: 50px;
+            border-radius: 14px;
             text-transform: uppercase;
             cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: var(--transition);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
 
-        .btn-votar:hover {
-            transform: scale(1.05);
-            filter: brightness(1.2);
-            box-shadow: 0 15px 35px rgba(0, 155, 58, 0.4);
-        }
-
-        .hidden { display: none; }
-        
         .sucesso-caixa {
-            background: rgba(0, 155, 58, 0.2);
-            border: 2px solid #00ff62;
-            color: #00ff62;
-            padding: 50px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid var(--brazil-green-glow);
+            padding: 60px 20px;
             border-radius: var(--radius);
             text-align: center;
-            font-weight: 900;
-            font-size: 1.8rem;
-            backdrop-filter: blur(10px);
+            animation: fadeIn 0.5s ease-out;
         }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .voter-info {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            color: var(--primary-yellow);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .timestamp {
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 10px;
+        }
+
+        .limit-notice {
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: #f44336;
+            font-weight: 600;
+        }
+
+        .hidden { display: none !important; }
 
         footer {
-            padding: 80px 20px;
+            padding: 40px 20px;
             text-align: center;
-            color: #fff;
-            font-size: 0.9rem;
-            font-weight: 500;
-            text-shadow: 0 2px 5px #000;
+            font-size: 0.8rem;
+            color: #666;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        footer strong { color: var(--primary-yellow); }
+        @media (max-width: 768px) {
+            header { padding: 40px 15px 20px; }
+            .card-img-wrapper { padding-top: 75%; }
+        }
     </style>
 </head>
 <body>
-
-<header>
-    <h1>Portal SBRP</h1>
-    <p>Eleições Presidenciais 2026</p>
-</header>
-
-<div class="container">
+    <div class="bg-overlay"></div>
     
-    <div class="grid-candidatos">
-        <div class="card">
-            <img src="https://via.placeholder.com/400x320/222/fff?text=Candidato+1" class="card-img" alt="Candidato">
-            <div class="card-body">
-                <span class="tag-cargo">ORDEM E PROGRESSO</span>
-                <h3>Ronaldinho Fenómeno</h3>
-                <p class="proposta">Proposta</p>
-            </div>
+    <header>
+        <div class="logo-container">
+            <span class="gov-badge">JUSTIÇA ELEITORAL</span>
+            <h1>Portal SBRP</h1>
+            <p>Eleições Presidenciais &copy 2026</p>
         </div>
+    </header>
 
-        <div class="card">
-            <img src="https://via.placeholder.com/400x320/222/fff?text=Candidato+2" class="card-img" alt="Candidato">
-            <div class="card-body">
-                <span class="tag-cargo">UNIÃO NACIONAL</span>
-                <h3>Cristiano Messi</h3>
-                <p class="proposta">Proposta</p>
+    <main class="container">
+        <section class="grid-candidatos">
+            <div class="card" data-id="1">
+                <div class="card-img-wrapper">
+                    <img src="candidate1.png" class="card-img" alt="Candidato 1">
+                    <div class="card-number">0</div>
+                </div>
+                <div class="card-body">
+                    <span class="tag-cargo">ORDEM E PROGRESSO</span>
+                    <h3></h3>
+                    <p class="proposta">Proposta</p>
+                </div>
             </div>
-        </div>
-    </div>
 
-    <div id="caixa-eleitoral">
-        <div class="vote-section">
-            <h2>Cédula Eleitoral</h2>
-            <p style="margin-bottom: 25px; font-weight: 500;">O voto é um dever do cidadão de SBRP.</p>
+            <div class="card" data-id="2">
+                <div class="card-img-wrapper">
+                    <img src="candidate2.png" class="card-img" alt="Candidato 2">
+                    <div class="card-number">0</div>
+                </div>
+                <div class="card-body">
+                    <span class="tag-cargo">UNIÃO NACIONAL</span>
+                    <h3>Nom3</h3>
+                    <p class="proposta">Proposta</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="caixa-eleitoral" class="vote-section">
+            <div class="vote-header">
+                <i data-lucide="check-square"></i>
+                <h2>Cédula Digital</h2>
+            </div>
+            <p class="instruction">Selecione seu candidato abaixo para confirmar seu voto eletrônico.</p>
             
-            <select id="voto-select">
-                <option value="" disabled selected>Clique para selecionar...</option>
-                <option value="Candidato 1">Nome do Candidato 1</option>
-                <option value="Candidato 2">Nome do Candidato 2</option>
-            </select>
-            <br>
-            <button class="btn-votar" onclick="votar()">Confirmar Voto</button>
+            <div class="select-wrapper">
+                <select id="voto-select">
+                    <option value="" disabled selected>Escolha um candidato...</option>
+                    <option value="1">0 - Nome</option>
+                    <option value="2">0 - Nom3</option>
+                    <option value="Branco">Voto em Branco</option>
+                </select>
+            </div>
+            
+            <button class="btn-votar" id="btn-confirmar">
+                <span>Confirmar Voto</span>
+                <i data-lucide="send"></i>
+            </button>
+        </section>
+
+        <section id="voto-concluido" class="sucesso-caixa hidden">
+            <div class="success-icon">🇧🇷</div>
+            <h2>FIM</h2>
+            <p>Seu voto foi computado com sucesso!</p>
+            <div class="voter-info">
+                <span id="voter-id-display"></span>
+            </div>
+            <div class="timestamp" id="vote-time"></div>
+            <p class="limit-notice">Este dispositivo já registrou um voto e não poderá votar novamente nesta eleição.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p><strong>SÃO BERNARDO ROLEPLAY</strong> - OFICIAL</p>
+            <p>Justiça, Liberdade e Democracia &copy; 2026</p>
         </div>
-    </div>
+    </footer>
 
-    <div id="voto-concluido" class="sucesso-caixa hidden">
-        🇧🇷 VOTO ESCOLHIDO COM SUCESSO!
-    </div>
+    <script type="module">
+        import { createIcons, CheckSquare, Send } from 'lucide';
 
-</div>
+        // Inicializar ícones
+        createIcons({
+            icons: {
+                CheckSquare,
+                Send
+            }
+        });
 
-<footer>
-    <strong>SÃO BERNARDO ROLEPLAY</strong> - OFICIAL<br>
-    Justiça e Liberdade &copy; 2026
-</footer>
+        const DISCORD_WEBHOOK_URL = ""; 
+        const COUNTER_NAMESPACE = "sbrp_eleicoes_2026_v1";
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
-<script>
-    function votar() {
-        const sel = document.getElementById('voto-select');
-        if(sel.value === "") {
-            alert("⚠️ Selecione um candidato!");
-            return;
+        async function incrementVote(candidateId) {
+            try {
+                const response = await fetch(`https://api.counterapi.dev/v1/${COUNTER_NAMESPACE}/${candidateId}/increment`);
+                const data = await response.json();
+                return data.count;
+            } catch (e) {
+                console.error("Erro ao incrementar contador:", e);
+                return null;
+            }
         }
-        localStorage.setItem('hasVotedSBC_Flag', 'true');
-        mostrarStatus();
-    }
 
-    function mostrarStatus() {
-        if(localStorage.getItem('hasVotedSBC_Flag') === 'true') {
-            document.getElementById('caixa-eleitoral').classList.add('hidden');
-            document.getElementById('voto-concluido').classList.remove('hidden');
+        async function getGlobalVotes() {
+            const ids = ['1', '2', 'Branco'];
+            const results = {};
+            for (const id of ids) {
+                try {
+                    const response = await fetch(`https://api.counterapi.dev/v1/${COUNTER_NAMESPACE}/${id}`);
+                    const data = await response.json();
+                    results[id] = data.count || 0;
+                } catch (e) {
+                    results[id] = 0;
+                }
+            }
+            return results;
         }
-    }
 
-    window.onload = mostrarStatus;
-</script>
+        async function sendToDiscord(candidateName, totals) {
+            if (!DISCORD_WEBHOOK_URL) return;
+            const embed = {
+                title: "📊 NOVO VOTO REGISTRADO",
+                description: `Um eleitor acaba de votar em: **${candidateName}**`,
+                color: 0x009b3a,
+                fields: [
+                    {
+                        name: "📈 Placar Atualizado",
+                        value: `**Nome (0):** ${totals['1']}\n**Nom3 (0):** ${totals['2']}\n**Branco:** ${totals['Branco']}`,
+                        inline: false
+                    }
+                ],
+                footer: { text: "Sistema SBRP • Presidenciais" + new Date().toLocaleString('pt-BR') }
+            };
+            try {
+                await fetch(DISCORD_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ embeds: [embed] })
+                });
+            } catch (e) { console.error(e); }
+        }
 
+        function generateVoterID() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let id = '';
+            for (let i = 0; i < 12; i++) {
+                id += chars.charAt(Math.floor(Math.random() * chars.length));
+                if ((i + 1) % 4 === 0 && i !== 11) id += '-';
+            }
+            return id;
+        }
+
+        async function votar() {
+            if (localStorage.getItem('hasVotedSBC_2026') === 'true') {
+                alert("Atenção: Este dispositivo já registrou um voto.");
+                return;
+            }
+            const select = document.getElementById('voto-select');
+            const btn = document.getElementById('btn-confirmar');
+            if (!select.value) {
+                alert("⚠️ Por favor, escolha um candidato antes de confirmar.");
+                return;
+            }
+            const selectedValue = select.value;
+            const selectedText = select.options[select.selectedIndex].text;
+            btn.disabled = true;
+            btn.innerText = "PROCESSANDO...";
+
+            await incrementVote(selectedValue);
+            const updatedTotals = await getGlobalVotes();
+            await sendToDiscord(selectedText, updatedTotals);
+
+            const now = new Date();
+            const formattedDate = now.toLocaleDateString('pt-BR') + ' às ' + now.toLocaleTimeString('pt-BR');
+            const voterID = generateVoterID();
+            
+            localStorage.setItem('hasVotedSBC_2026', 'true');
+            localStorage.setItem('votedAt', formattedDate);
+            localStorage.setItem('voterID', voterID);
+            mostrarStatus();
+        }
+
+        function mostrarStatus() {
+            const hasVoted = localStorage.getItem('hasVotedSBC_2026');
+            if (hasVoted === 'true') {
+                document.querySelector('.grid-candidatos').classList.add('hidden');
+                document.getElementById('caixa-eleitoral').classList.add('hidden');
+                document.getElementById('voto-concluido').classList.remove('hidden');
+                document.getElementById('vote-time').innerText = `Emitido em: ${localStorage.getItem('votedAt')}`;
+                document.getElementById('voter-id-display').innerText = `AUTENTICAÇÃO: ${localStorage.getItem('voterID')}`;
+            }
+        }
+
+        document.getElementById('btn-confirmar').addEventListener('click', votar);
+        window.onload = mostrarStatus;
+    </script>
 </body>
 </html>
