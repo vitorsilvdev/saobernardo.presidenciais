@@ -120,13 +120,11 @@
             border: 1px solid var(--glass-border);
             overflow: hidden;
             transition: var(--transition);
-            cursor: default;
         }
 
         .card:hover {
             transform: translateY(-8px);
             border-color: var(--primary-yellow);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
 
         .card-img-wrapper {
@@ -143,13 +141,6 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: grayscale(20%);
-            transition: var(--transition);
-        }
-
-        .card:hover .card-img {
-            filter: grayscale(0%);
-            scale: 1.05;
         }
 
         .card-number {
@@ -166,34 +157,11 @@
             align-items: center;
             justify-content: center;
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
 
-        .card-body {
-            padding: 20px;
-        }
-
-        .tag-cargo {
-            color: var(--brazil-green-glow);
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        .card-body h3 {
-            font-size: 1.4rem;
-            margin-bottom: 10px;
-            font-weight: 800;
-        }
-
-        .proposta {
-            color: #aaa;
-            font-size: 0.9rem;
-            line-height: 1.4;
-            font-style: italic;
-        }
+        .card-body { padding: 20px; }
+        .tag-cargo { color: var(--brazil-green-glow); font-size: 0.7rem; font-weight: 700; display: block; }
+        .proposta { color: #aaa; font-size: 0.9rem; font-style: italic; }
 
         .vote-section {
             background: rgba(0, 0, 0, 0.4);
@@ -205,62 +173,30 @@
             margin: 0 auto;
         }
 
-        .vote-header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 15px;
-            color: var(--primary-yellow);
-        }
-
-        .vote-header h2 {
-            font-size: 1.8rem;
-            text-transform: uppercase;
-        }
-
-        .instruction {
-            margin-bottom: 30px;
-            color: #ccc;
-            font-size: 0.95rem;
-        }
-
-        .select-wrapper {
-            position: relative;
-            margin-bottom: 25px;
-        }
-
         select {
             width: 100%;
             padding: 18px;
-            font-size: 1rem;
-            border-radius: 14px;
             background: #111;
             color: #fff;
+            border-radius: 14px;
             border: 1px solid var(--glass-border);
-            cursor: pointer;
-            appearance: none;
-            outline: none;
-            transition: var(--transition);
+            margin-bottom: 25px;
         }
 
         .btn-votar {
             width: 100%;
             background: linear-gradient(135deg, var(--brazil-green), #004d2a);
             color: white;
-            border: none;
             padding: 20px;
-            font-size: 1.1rem;
             font-weight: 800;
             border-radius: 14px;
-            text-transform: uppercase;
+            border: none;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            transition: var(--transition);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            text-transform: uppercase;
         }
 
         .sucesso-caixa {
@@ -269,43 +205,14 @@
             padding: 60px 20px;
             border-radius: var(--radius);
             text-align: center;
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        .success-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
         }
 
         .voter-info {
             margin: 20px 0;
             padding: 15px;
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            font-family: 'Courier New', Courier, monospace;
-            font-weight: bold;
             color: var(--primary-yellow);
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-        }
-
-        .timestamp {
             font-family: monospace;
-            font-size: 0.8rem;
-            color: #888;
-            margin-top: 10px;
-        }
-
-        .limit-notice {
-            margin-top: 30px;
-            font-size: 0.8rem;
-            color: #f44336;
-            font-weight: 600;
         }
 
         .hidden { display: none !important; }
@@ -315,12 +222,6 @@
             text-align: center;
             font-size: 0.8rem;
             color: #666;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        @media (max-width: 768px) {
-            header { padding: 40px 15px 20px; }
-            .card-img-wrapper { padding-top: 75%; }
         }
     </style>
 </head>
@@ -331,100 +232,86 @@
         <div class="logo-container">
             <span class="gov-badge">JUSTIÇA ELEITORAL</span>
             <h1>Portal SBRP</h1>
-            <p>Eleições Presidenciais &copy 2026</p>
+            <p>Eleições Presidenciais &copy; 2026</p>
         </div>
     </header>
 
     <main class="container">
         <section class="grid-candidatos">
-            <div class="card" data-id="1">
+            <div class="card">
                 <div class="card-img-wrapper">
-                    <img src="candidate1.png" class="card-img" alt="Candidato 1">
-                    <div class="card-number">0</div>
+                    <img src="https://via.placeholder.com/400" class="card-img" alt="Candidato 1">
+                    <div class="card-number">10</div>
                 </div>
                 <div class="card-body">
                     <span class="tag-cargo">ORDEM E PROGRESSO</span>
-                    <h3></h3>
-                    <p class="proposta">Proposta</p>
+                    <h3>Candidato Exemplo 1</h3>
+                    <p class="proposta">"Pelo futuro da nossa cidade."</p>
                 </div>
             </div>
 
-            <div class="card" data-id="2">
+            <div class="card">
                 <div class="card-img-wrapper">
-                    <img src="candidate2.png" class="card-img" alt="Candidato 2">
-                    <div class="card-number">0</div>
+                    <img src="https://via.placeholder.com/400" class="card-img" alt="Candidato 2">
+                    <div class="card-number">20</div>
                 </div>
                 <div class="card-body">
                     <span class="tag-cargo">UNIÃO NACIONAL</span>
-                    <h3>Nom3</h3>
-                    <p class="proposta">Proposta</p>
+                    <h3>Candidato Exemplo 2</h3>
+                    <p class="proposta">"Transparência e Inovação."</p>
                 </div>
             </div>
         </section>
 
         <section id="caixa-eleitoral" class="vote-section">
-            <div class="vote-header">
-                <i data-lucide="check-square"></i>
+            <div class="vote-header" style="color: var(--primary-yellow); margin-bottom: 15px;">
                 <h2>Cédula Digital</h2>
             </div>
-            <p class="instruction">Selecione seu candidato abaixo para confirmar seu voto eletrônico.</p>
+            <p style="margin-bottom: 20px; color: #ccc;">Selecione seu candidato abaixo:</p>
             
-            <div class="select-wrapper">
-                <select id="voto-select">
-                    <option value="" disabled selected>Escolha um candidato...</option>
-                    <option value="1">0 - Nome</option>
-                    <option value="2">0 - Nom3</option>
-                    <option value="Branco">Voto em Branco</option>
-                </select>
-            </div>
+            <select id="voto-select">
+                <option value="" disabled selected>Escolha um candidato...</option>
+                <option value="1">10 - Candidato Exemplo 1</option>
+                <option value="2">20 - Candidato Exemplo 2</option>
+                <option value="Branco">Voto em Branco</option>
+            </select>
             
             <button class="btn-votar" id="btn-confirmar">
                 <span>Confirmar Voto</span>
-                <i data-lucide="send"></i>
             </button>
         </section>
 
         <section id="voto-concluido" class="sucesso-caixa hidden">
-            <div class="success-icon">🇧🇷</div>
+            <div style="font-size: 4rem;">🇧🇷</div>
             <h2>FIM</h2>
             <p>Seu voto foi computado com sucesso!</p>
             <div class="voter-info">
                 <span id="voter-id-display"></span>
             </div>
-            <div class="timestamp" id="vote-time"></div>
-            <p class="limit-notice">Este dispositivo já registrou um voto e não poderá votar novamente nesta eleição.</p>
+            <div id="vote-time" style="font-size: 0.8rem; color: #888;"></div>
+            <p style="color: #f44336; font-size: 0.8rem; margin-top: 20px;">Este dispositivo já registrou um voto.</p>
         </section>
     </main>
 
     <footer>
-        <div class="footer-content">
-            <p><strong>SÃO BERNARDO ROLEPLAY</strong> - OFICIAL</p>
-            <p>Justiça, Liberdade e Democracia &copy; 2026</p>
-        </div>
+        <p><strong>SÃO BERNARDO ROLEPLAY</strong> - OFICIAL</p>
+        <p>Justiça, Liberdade e Democracia &copy; 2026</p>
     </footer>
 
     <script type="module">
         import { createIcons, CheckSquare, Send } from 'lucide';
 
-        // Inicializar ícones
-        createIcons({
-            icons: {
-                CheckSquare,
-                Send
-            }
-        });
+        createIcons({ icons: { CheckSquare, Send } });
 
         const DISCORD_WEBHOOK_URL = "https://ptb.discord.com/api/webhooks/1459593971432161372/fI1iDIDAQ2D1_h-nnGjNv3LZit4TAGWNxkPYU6PfwNMaSaIfzcT82bzrLKaNUq4lvu39"; 
         const COUNTER_NAMESPACE = "sbrp_eleicoes_2026_v1";
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
         async function incrementVote(candidateId) {
             try {
                 const response = await fetch(`https://api.counterapi.dev/v1/${COUNTER_NAMESPACE}/${candidateId}/increment`);
-                const data = await response.json();
-                return data.count;
+                return await response.json();
             } catch (e) {
-                console.error("Erro ao incrementar contador:", e);
+                console.error("Erro ao incrementar:", e);
                 return null;
             }
         }
@@ -446,71 +333,74 @@
 
         async function sendToDiscord(candidateName, totals) {
             if (!DISCORD_WEBHOOK_URL) return;
+            
             const embed = {
                 title: "📊 NOVO VOTO REGISTRADO",
-                description: `Um eleitor acaba de votar em: **${candidateName}**`,
+                description: `Um eleitor votou em: **${candidateName}**`,
                 color: 0x009b3a,
                 fields: [
                     {
                         name: "📈 Placar Atualizado",
-                        value: `**Nome (0):** ${totals['1']}\n**Nom3 (0):** ${totals['2']}\n**Branco:** ${totals['Branco']}`,
+                        value: `**Candidato 1:** ${totals['1']}\n**Candidato 2:** ${totals['2']}\n**Branco:** ${totals['Branco']}`,
                         inline: false
                     }
                 ],
-                footer: { text: "Sistema SBRP • Presidenciais" + new Date().toLocaleString('pt-BR') }
+                footer: { text: "SBRP • " + new Date().toLocaleString('pt-BR') }
             };
-            try {
-                await fetch(DISCORD_WEBHOOK_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ embeds: [embed] })
-                });
-            } catch (e) { console.error(e); }
+
+            await fetch(DISCORD_WEBHOOK_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ embeds: [embed] })
+            });
         }
 
         function generateVoterID() {
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-            let id = '';
-            for (let i = 0; i < 12; i++) {
-                id += chars.charAt(Math.floor(Math.random() * chars.length));
-                if ((i + 1) % 4 === 0 && i !== 11) id += '-';
-            }
-            return id;
+            return Math.random().toString(36).substr(2, 9).toUpperCase();
         }
 
         async function votar() {
             if (localStorage.getItem('hasVotedSBC_2026') === 'true') {
-                alert("Atenção: Este dispositivo já registrou um voto.");
+                alert("Este dispositivo já votou.");
                 return;
             }
+
             const select = document.getElementById('voto-select');
             const btn = document.getElementById('btn-confirmar');
+
             if (!select.value) {
-                alert("⚠️ Por favor, escolha um candidato antes de confirmar.");
+                alert("Escolha um candidato.");
                 return;
             }
-            const selectedValue = select.value;
-            const selectedText = select.options[select.selectedIndex].text;
+
+            const val = select.value;
+            const text = select.options[select.selectedIndex].text;
+
             btn.disabled = true;
             btn.innerText = "PROCESSANDO...";
 
-            await incrementVote(selectedValue);
-            const updatedTotals = await getGlobalVotes();
-            await sendToDiscord(selectedText, updatedTotals);
-
-            const now = new Date();
-            const formattedDate = now.toLocaleDateString('pt-BR') + ' às ' + now.toLocaleTimeString('pt-BR');
-            const voterID = generateVoterID();
+            // 1. Incrementa
+            await incrementVote(val);
             
+            // 2. Delay de 600ms para a API salvar o dado
+            await new Promise(r => setTimeout(r, 600));
+
+            // 3. Puxa totais e envia Discord
+            const totals = await getGlobalVotes();
+            await sendToDiscord(text, totals);
+
+            // 4. Salva localmente
+            const now = new Date().toLocaleString('pt-BR');
+            const id = generateVoterID();
             localStorage.setItem('hasVotedSBC_2026', 'true');
-            localStorage.setItem('votedAt', formattedDate);
-            localStorage.setItem('voterID', voterID);
+            localStorage.setItem('votedAt', now);
+            localStorage.setItem('voterID', id);
+
             mostrarStatus();
         }
 
         function mostrarStatus() {
-            const hasVoted = localStorage.getItem('hasVotedSBC_2026');
-            if (hasVoted === 'true') {
+            if (localStorage.getItem('hasVotedSBC_2026') === 'true') {
                 document.querySelector('.grid-candidatos').classList.add('hidden');
                 document.getElementById('caixa-eleitoral').classList.add('hidden');
                 document.getElementById('voto-concluido').classList.remove('hidden');
